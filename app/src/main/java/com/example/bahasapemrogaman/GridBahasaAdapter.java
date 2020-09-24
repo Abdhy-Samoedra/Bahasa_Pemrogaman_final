@@ -19,6 +19,12 @@ public class GridBahasaAdapter extends RecyclerView.Adapter<GridBahasaAdapter.Gr
     public GridBahasaAdapter(ArrayList<Bahasa>list){
         this.listBahasa=list;
     }
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+                this.onItemClickCallback = onItemClickCallback;
+            }
+
 
     @NonNull
     @Override
@@ -34,7 +40,19 @@ public class GridBahasaAdapter extends RecyclerView.Adapter<GridBahasaAdapter.Gr
                 .apply(new RequestOptions().override(350,550))
                 .into(holder.imgPhoto);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+	            public void onClick(View v) {
+                	                onItemClickCallback.onItemClicked(listBahasa.get(holder.getAdapterPosition()));
+                	            }
+	        });
+
+
     }
+    public interface OnItemClickCallback {
+	        void onItemClicked(Bahasa data);
+	    }
+
 
     @Override
     public int getItemCount() {

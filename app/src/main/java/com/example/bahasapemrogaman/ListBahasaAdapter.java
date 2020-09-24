@@ -17,6 +17,11 @@ import java.util.ArrayList;
 public class ListBahasaAdapter extends RecyclerView.Adapter<ListBahasaAdapter.ListviewHolder> {
 
     private ArrayList<Bahasa> listBahasa;
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
+    }
 
     public ListBahasaAdapter(ArrayList<Bahasa> list){
         this.listBahasa = list;
@@ -37,7 +42,17 @@ public class ListBahasaAdapter extends RecyclerView.Adapter<ListBahasaAdapter.Li
                 .into(holder.imgPhoto);
         holder.tvName.setText(bahasa.getName());
         holder.tvDetail.setText(bahasa.getDetail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickCallback.onItemClicked(listBahasa.get(holder.getAdapterPosition()));
+            }
+        });
 
+    }
+
+    public interface OnItemClickCallback{
+        void onItemClicked(Bahasa data);
     }
 
     @Override
