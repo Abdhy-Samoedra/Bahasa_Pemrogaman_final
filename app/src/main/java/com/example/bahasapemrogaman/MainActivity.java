@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         switch (selectedMode){
             case R.id.action_list:
                 title = "Mode List";
+                showRecyclerList();
                  ;
 
             case R.id.action_grid:
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             case R.id.action_cardview:
-                title = "Mode Card";
+                title = "Mode CardView";
                 showRecyclerCardView();
             break;
         }
